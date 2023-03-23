@@ -1,0 +1,104 @@
+import tkinter as tk
+
+
+def funkcja():
+    pierwsz = True
+    n = int(ent_temperature.get())
+    x = 5
+    if n == 1:
+        pierwsz = False
+    if n != 3 and n % 3 == 0: pierwsz = False
+    if n != 2 and n % 2 == 0:
+        pierwsz = False
+    else:
+        while n > 6 and x < n:
+            if n % x == 0:
+                pierwsz = False
+                break
+            x += 1
+
+    # nivena = True
+    # a = str(n)
+    # b = 0
+    # for i in a:
+    #     b += int(i)
+    # if n % b == 0:
+    #     nivena = True
+    # else:
+    #     nivena = False
+
+    bezkwadratowa = True
+    x = 2
+    while n >= x:
+        if n % (x ** 2) == 0:
+            bezkwadratowa = False
+            break
+        x += 1
+
+    doskonala = True
+    tab = []
+    suma = 0
+    for i in range(1, int(n + 1)):
+        if n % i == 0:
+            tab.append(i)
+    for i in range(0, len(tab) - 1):
+        suma += tab[i]
+    if n == suma:
+        doskonala = True
+    else:
+        doskonala = False
+
+    cullen = False
+    print(n)
+    x = 1
+    while x < int(n):
+        if int(x * (2 ** x) + 1) == int(n):
+            cullen = True
+            break
+        x += 1
+    print(cullen)
+
+
+    wesola = True
+    k = 0
+    l = 1
+    while True:
+        if n == 4:
+            wesola = False
+            break
+        if n == 1:
+            wesola = True
+            break
+        k = n
+        n = 0
+        while k > 0:
+            n += (k % 10) * (k % 10)
+            k -= k % 10
+            k /= 10
+        l += 1
+    lbl_result[
+        "text"] = f" DOSKONALA = {doskonala}\n PIERWSZA = {pierwsz} \n CULLEN = {cullen}\n BEZKWADRATOWA = {bezkwadratowa}\n WESOLA = {wesola}"
+
+
+window = tk.Tk()
+window['background'] = '#856ff8'
+frm_entry = tk.Frame(master=window)
+ent_temperature = tk.Entry(master=frm_entry, width=10)
+lbl_temp = tk.Label(master=frm_entry, text="NUMER")
+ent_temperature.grid(row=2, column=1, sticky="e")
+btn_convert = tk.Button(
+    master=window,
+    text="\N{RIGHTWARDS BLACK ARROW}",
+    command=funkcja,
+)
+lbl_result = tk.Label(master=window, text=" ")
+frm_entry.grid(row=0, column=0, padx=10)
+btn_convert.grid(row=0, column=1, pady=10)
+lbl_result.grid(row=0, column=2, padx=10)
+lbl_result['background'] = '#856ff8'
+ent_temperature['background'] = '#EBAFEF'
+btn_convert['background'] = '#EBAFEF'
+window.title("NUMEREK")
+
+
+window.mainloop()
